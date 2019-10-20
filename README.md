@@ -74,3 +74,9 @@ categories always follow their parent:
     aba
     aba/dat
     abaala
+
+## Development
+
+Contributions are welcome and much appreciated. See [CONTRIBUTING.md][] for more information.
+
+[CONTRIBUTING.md]: https://github.com/pelican-plugins/more-categories/blob/master/CONTRIBUTING.md
