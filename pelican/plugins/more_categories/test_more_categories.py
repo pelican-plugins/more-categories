@@ -11,7 +11,6 @@ from pelican.tests.support import get_context, get_settings
 
 
 class TestArticlesGenerator(unittest.TestCase):
-
     @classmethod
     def setUpClass(cls):
         cls.temp_path = mkdtemp(prefix='pelicantests.')
@@ -25,8 +24,12 @@ class TestArticlesGenerator(unittest.TestCase):
         base_path = os.path.dirname(os.path.abspath(__file__))
         test_data_path = os.path.join(base_path, 'test_data')
         cls.generator = ArticlesGenerator(
-            context=context, settings=settings,
-            path=test_data_path, theme=settings['THEME'], output_path=cls.temp_path)
+            context=context,
+            settings=settings,
+            path=test_data_path,
+            theme=settings['THEME'],
+            output_path=cls.temp_path,
+        )
         cls.generator.generate_context()
 
     @classmethod
@@ -38,14 +41,14 @@ class TestArticlesGenerator(unittest.TestCase):
         including ancestor categories"""
 
         cats_generated = [cat.name for cat, _ in self.generator.categories]
-        cats_expected = ['default', 'foo', 'foo/bar', 'foo/b#az',]
+        cats_expected = ['default', 'foo', 'foo/bar', 'foo/b#az']
         self.assertEqual(sorted(cats_generated), sorted(cats_expected))
 
     def test_categories_slug(self):
         """Test whether category slug substitutions are used"""
 
         slugs_generated = [cat.slug for cat, _ in self.generator.categories]
-        slugs_expected = ['default', 'foo', 'foo/bar', 'foo/baz',]
+        slugs_expected = ['default', 'foo', 'foo/bar', 'foo/baz']
         self.assertEqual(sorted(slugs_generated), sorted(slugs_expected))
 
     def test_assign_articles_to_categories(self):

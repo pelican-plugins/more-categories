@@ -8,10 +8,11 @@ Requirements: Pelican 3.8 or higher
 
 from pelican import signals
 from pelican.urlwrappers import URLWrapper
-from pelican.utils import (slugify, python_2_unicode_compatible)
+from pelican.utils import slugify, python_2_unicode_compatible
 
 from collections import defaultdict
 from six import text_type
+
 
 class Category(URLWrapper):
     @property
@@ -60,8 +61,7 @@ class Category(URLWrapper):
 
 def get_categories(generator, metadata):
     categories = text_type(metadata.get('category')).split(',')
-    metadata['categories'] = [
-        Category(name, generator.settings) for name in categories]
+    metadata['categories'] = [Category(name, generator.settings) for name in categories]
     metadata['category'] = metadata['categories'][0]
 
 
@@ -74,7 +74,8 @@ def create_categories(generator):
 
     generator.categories = sorted(
         list(cat_dct.items()),
-        reverse=generator.settings.get('REVERSE_CATEGORY_ORDER') or False)
+        reverse=generator.settings.get('REVERSE_CATEGORY_ORDER') or False,
+    )
     generator._update_context(['categories'])
 
 
