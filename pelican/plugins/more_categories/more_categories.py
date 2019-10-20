@@ -6,12 +6,13 @@ categories
 Requirements: Pelican 3.8 or higher
 """
 
+from collections import defaultdict
+
+from six import text_type
+
 from pelican import signals
 from pelican.urlwrappers import URLWrapper
 from pelican.utils import slugify
-
-from collections import defaultdict
-from six import text_type
 
 
 class Category(URLWrapper):

@@ -1,13 +1,14 @@
 """Unit tests for the more_categories plugin"""
 
 import os
-import unittest
 from shutil import rmtree
 from tempfile import mkdtemp
+import unittest
 
-from . import more_categories
 from pelican.generators import ArticlesGenerator
 from pelican.tests.support import get_context, get_settings
+
+from . import more_categories
 
 
 class TestArticlesGenerator(unittest.TestCase):
