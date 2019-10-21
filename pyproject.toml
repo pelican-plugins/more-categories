@@ -6,8 +6,10 @@ authors = ["Oliver Urs Lenz <oliver.urs.lenz@gmail.com>"]
 license = "AGPL-3.0"
 readme = "README.md"
 keywords = ["pelican", "plugin"]
-
 repository = "https://github.com/pelican-plugins/more-categories"
+packages = [
+    { include = "pelican"},
+]
 
 classifiers = [
     "Development Status :: 5 - Production/Stable",
