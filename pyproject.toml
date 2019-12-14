@@ -56,5 +56,5 @@ Werkzeug = "^0.15.5"
 markdown = ["markdown"]
 
 [build-system]
-requires = ["poetry>=0.12"]
+requires = ["poetry>=1.0"]
 build-backend = "poetry.masonry.api"
