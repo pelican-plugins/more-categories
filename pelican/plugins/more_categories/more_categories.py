@@ -3,7 +3,7 @@
 Title: More Categories
 Description: adds support for multiple categories per article and nested
 categories
-Requirements: Pelican 3.8 or higher
+Requirements: Pelican 4.2.0 or higher
 """
 
 from collections import defaultdict
@@ -19,13 +19,13 @@ class Category(URLWrapper):
     @property
     def _name(self):
         if self.parent:
-            return self.parent._name + '/' + self.shortname
+            return self.parent._name + "/" + self.shortname
         return self.shortname
 
     @_name.setter
     def _name(self, val):
-        if '/' in val:
-            parentname, val = val.rsplit('/', 1)
+        if "/" in val:
+            parentname, val = val.rsplit("/", 1)
             self.parent = self.__class__(parentname, self.settings)
         else:
             self.parent = None
@@ -38,14 +38,13 @@ class Category(URLWrapper):
     @property
     def slug(self):
         if self._slug is None:
-            if 'CATEGORY_REGEX_SUBSTITUTIONS' in self.settings:
-                subs = self.settings['CATEGORY_REGEX_SUBSTITUTIONS']
+            if "CATEGORY_REGEX_SUBSTITUTIONS" in self.settings:
+                subs = self.settings["CATEGORY_REGEX_SUBSTITUTIONS"]
             else:
-                subs = self.settings.get('SLUG_REGEX_SUBSTITUTIONS', [])
+                subs = self.settings.get("SLUG_REGEX_SUBSTITUTIONS", [])
             self._slug = slugify(self.shortname, regex_subs=subs)
-            print(self._slug)
             if self.parent:
-                self._slug = self.parent.slug + '/' + self._slug
+                self._slug = self.parent.slug + "/" + self._slug
         return self._slug
 
     @property
@@ -56,14 +55,14 @@ class Category(URLWrapper):
 
     def as_dict(self):
         d = super(Category, self).as_dict()
-        d['shortname'] = self.shortname
+        d["shortname"] = self.shortname
         return d
 
 
 def get_categories(generator, metadata):
-    categories = text_type(metadata.get('category')).split(',')
-    metadata['categories'] = [Category(name, generator.settings) for name in categories]
-    metadata['category'] = metadata['categories'][0]
+    categories = text_type(metadata.get("category")).split(",")
+    metadata["categories"] = [Category(name, generator.settings) for name in categories]
+    metadata["category"] = metadata["categories"][0]
 
 
 def create_categories(generator):
@@ -75,9 +74,24 @@ def create_categories(generator):
 
     generator.categories = sorted(
         list(cat_dct.items()),
-        reverse=generator.settings.get('REVERSE_CATEGORY_ORDER') or False,
+        reverse=generator.settings.get("REVERSE_CATEGORY_ORDER") or False,
     )
-    generator._update_context(['categories'])
+    generator._update_context(["categories"])
+
+    # Add subcategories
+    cats = {}
+    for category, articles in generator.categories:
+        for anc in category.ancestors:
+            if anc != category:
+                if anc.slug in cats:
+                    cats[anc.slug].append(category)
+                else:
+                    cats[anc.slug] = [category]
+    for category, articles in generator.categories:
+        if category.slug in cats:
+            category.subcategories = cats[category.slug]
+        else:
+            category.subcategories = []
 
 
 def register():
