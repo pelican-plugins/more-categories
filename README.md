@@ -20,13 +20,6 @@ or not, use:
         <a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a>{{ ', ' if not loop.last }}
     {% endfor %}
 
-Additionally, this plugin adds `category.subcategories`: a `list` of categories
-that have `category` as a parent.
-
-    {% for subcat in category.subcategories %}
-        <a href="{{ SITEURL }}/{{subcat.url}}">{{subcat.shortname|capitalize}}</a>
-    {% endfor %}
-
 ## Nested categories
 (This is a reimplementation of the `subcategory` plugin.)
 
@@ -53,6 +46,13 @@ case this plugin in present, use:
 
 Likewise, `category.shortname`, `category.parent` and `category.ancestors` can
 also be used on the category template.
+
+Additionally, this plugin adds `category.subcategories`: a `list` of categories
+that have `category` as a parent.
+
+    {% for subcat in category.subcategories %}
+        <a href="{{ SITEURL }}/{{subcat.url}}">{{subcat.shortname|capitalize}}</a>
+    {% endfor %}
 
 ### Slug
 The slug of a category is generated recursively by slugifying the shortname of
