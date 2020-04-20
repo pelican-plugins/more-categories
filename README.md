@@ -20,6 +20,13 @@ or not, use:
         <a href="{{ SITEURL }}/{{ cat.url }}">{{ cat }}</a>{{ ', ' if not loop.last }}
     {% endfor %}
 
+Additionally, this plugin adds `category.subcategories`: a `list` of categories
+that have `category` as a parent.
+
+    {% for subcat in category.subcategories %}
+        <a href="{{ SITEURL }}/{{subcat.url}}">{{subcat.shortname|capitalize}}</a>
+    {% endfor %}
+
 ## Nested categories
 (This is a reimplementation of the `subcategory` plugin.)
 
