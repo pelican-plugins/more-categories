@@ -3,7 +3,7 @@
 Title: More Categories
 Description: adds support for multiple categories per article and nested
 categories
-Requirements: Pelican 4.2.0 or higher
+Requirements: Pelican 4.0.0 or higher
 """
 
 from collections import defaultdict
