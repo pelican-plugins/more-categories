@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Title: More Categories
+Title: more-categories
 Description: adds support for multiple categories per article and nested
 categories
 Requirements: Pelican 3.8 or higher

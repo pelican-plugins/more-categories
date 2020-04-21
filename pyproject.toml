@@ -55,6 +55,11 @@ Werkzeug = "^0.15.5"
 [tool.poetry.extras]
 markdown = ["markdown"]
 
+[tool.autopub]
+project-name = "more-categories"
+git-username = "botpub"
+git-email = "botpub@autopub.rocks"
+
 [build-system]
 requires = ["poetry>=1.0"]
 build-backend = "poetry.masonry.api"

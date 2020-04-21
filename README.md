@@ -1,4 +1,4 @@
-# More Categories
+# more-categories
 
 [![Build Status](https://img.shields.io/github/workflow/status/pelican-plugins/more-categories/build)](https://github.com/pelican-plugins/more-categories/actions)
 
