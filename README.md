@@ -1,4 +1,7 @@
 # More Categories
+
+[![Build Status](https://img.shields.io/github/workflow/status/pelican-plugins/more-categories/build)](https://github.com/pelican-plugins/more-categories/actions)
+
 This plugin adds support for multiple categories per article, and for nested
 categories. It requires Pelican 4.0.0 or newer.
 
