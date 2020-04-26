@@ -78,23 +78,17 @@ def create_categories(generator):
     )
     generator._update_context(['categories'])
 
-    # Add subcategories and children
+    # Add descendents and children
     descendents = defaultdict(list)
     children = defaultdict(list)
     for category, articles in generator.categories:
         for anc in category.ancestors[1:]:
             descendents[anc].append(category)
-            if anc == category.parent:
-                children[anc].append(category)
+        if category.parent:
+            children[category.parent].append(category)
     for category, articles in generator.categories:
-        if category.slug in descendents:
-            category.descendents = descendents[category]
-        else:
-            category.descendents = []
-        if category.slug in children:
-            category.children = children[category]
-        else:
-            category.children = []
+        category.descendents = sorted(descendents[category])
+        category.children = sorted(children[category])
 
 
 def register():

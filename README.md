@@ -47,12 +47,14 @@ case this plugin in present, use:
 Likewise, `category.shortname`, `category.parent` and `category.ancestors` can
 also be used on the category template.
 
-Additionally, this plugin adds `category.subcategories`: a `list` of categories
+Additionally, this plugin adds `category.children`: a `list` of categories
 that have `category` as a parent.
 
-    {% for subcat in category.subcategories %}
-        <a href="{{ SITEURL }}/{{subcat.url}}">{{subcat.shortname|capitalize}}</a>
+    {% for child in category.children %}
+        <a href="{{ SITEURL }}/{{child.url}}">{{child.shortname|capitalize}}</a>
     {% endfor %}
+
+If you need all descendents and not just the immediate children, you can use the `list` of descendents: `category.descendents`.
 
 ### Slug
 The slug of a category is generated recursively by slugifying the shortname of
