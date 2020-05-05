@@ -14,12 +14,12 @@ VENV = str(VENV_PATH.expanduser())
 
 
 TOOLS = ['poetry', 'pre-commit']
-FLAKE8 = which('flake8') if which('flake8') else (VENV / Path('bin') / 'flake8')
-ISORT = which('isort') if which('isort') else (VENV / Path('bin') / 'isort')
-PYTEST = which('pytest') if which('pytest') else (VENV / Path('bin') / 'pytest')
-PIP = which('pip') if which('pip') else (VENV / Path('bin') / 'pip')
-POETRY = which('poetry') if which('poetry') else (VENV / Path('bin') / 'poetry')
-PRECOMMIT = which('pre-commit') if which('pre-commit') else (VENV / Path('bin') / 'pre-commit')
+FLAKE8 = which('flake8') or Path(f'{VENV}/bin/flake8')
+ISORT = which('isort') or Path(f'{VENV}/bin/isort')
+PYTEST = which('pytest') or Path(f'{VENV}/bin/pytest')
+PIP = which('pip') or Path(f'{VENV}/bin/pip')
+POETRY = which('poetry') or Path(f'{VENV}/bin/poetry')
+PRECOMMIT = which('pre-commit') or Path(f'{VENV}/bin/pre-commit')
 
 
 @task
