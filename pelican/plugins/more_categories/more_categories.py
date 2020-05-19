@@ -82,7 +82,7 @@ def create_categories(generator):
     descendents = defaultdict(list)
     children = defaultdict(list)
     for category, articles in generator.categories:
-        for anc in category.ancestors[1:]:
+        for anc in category.ancestors[:-1]:
             descendents[anc].append(category)
         if category.parent:
             children[category.parent].append(category)
