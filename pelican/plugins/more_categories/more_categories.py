@@ -3,7 +3,7 @@
 Title: more-categories
 Description: adds support for multiple categories per article and nested
 categories
-Requirements: Pelican 3.8 or higher
+Requirements: Pelican 4.0.0 or higher
 """
 
 from collections import defaultdict
@@ -43,7 +43,6 @@ class Category(URLWrapper):
             else:
                 subs = self.settings.get('SLUG_REGEX_SUBSTITUTIONS', [])
             self._slug = slugify(self.shortname, regex_subs=subs)
-            print(self._slug)
             if self.parent:
                 self._slug = self.parent.slug + '/' + self._slug
         return self._slug
@@ -78,6 +77,18 @@ def create_categories(generator):
         reverse=generator.settings.get('REVERSE_CATEGORY_ORDER') or False,
     )
     generator._update_context(['categories'])
+
+    # Add descendents and children
+    descendents = defaultdict(list)
+    children = defaultdict(list)
+    for category, articles in generator.categories:
+        for anc in category.ancestors[:-1]:
+            descendents[anc].append(category)
+        if category.parent:
+            children[category.parent].append(category)
+    for category, articles in generator.categories:
+        category.descendents = sorted(descendents[category])
+        category.children = sorted(children[category])
 
 
 def register():

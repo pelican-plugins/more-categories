@@ -32,6 +32,7 @@ class TestArticlesGenerator(unittest.TestCase):
             output_path=cls.temp_path,
         )
         cls.generator.generate_context()
+        cls.cats = {cat.name: cat for cat, _ in cls.generator.categories}
 
     @classmethod
     def tearDownClass(cls):
@@ -41,15 +42,34 @@ class TestArticlesGenerator(unittest.TestCase):
         """Test whether multiple categories are generated correctly,
         including ancestor categories"""
 
-        cats_generated = [cat.name for cat, _ in self.generator.categories]
-        cats_expected = ['default', 'foo', 'foo/bar', 'foo/b#az']
-        self.assertEqual(sorted(cats_generated), sorted(cats_expected))
+        cats_expected = ['default', 'foo', 'foo/bar', 'foo/b#az', 'foo/b#az/quux']
+        self.assertEqual(sorted(list(self.cats.keys())), sorted(cats_expected))
+
+    def test_extended_family(self):
+        """Test whether categories correctly include their extended family"""
+
+        self.assertEqual(
+            self.cats['foo/b#az/quux'].parent,
+            self.cats['foo/b#az']
+        )
+        self.assertEqual(
+            self.cats['foo/b#az/quux'].ancestors,
+            [self.cats['foo'], self.cats['foo/b#az'], self.cats['foo/b#az/quux'], ]
+        )
+        self.assertEqual(
+            self.cats['foo'].children,
+            [self.cats['foo/bar'], self.cats['foo/b#az']]
+        )
+        self.assertEqual(
+            self.cats['foo'].descendents,
+            [self.cats['foo/bar'], self.cats['foo/b#az'], self.cats['foo/b#az/quux'], ]
+        )
 
     def test_categories_slug(self):
         """Test whether category slug substitutions are used"""
 
-        slugs_generated = [cat.slug for cat, _ in self.generator.categories]
-        slugs_expected = ['default', 'foo', 'foo/bar', 'foo/baz']
+        slugs_generated = [cat.slug for cat in self.cats.values()]
+        slugs_expected = ['default', 'foo', 'foo/bar', 'foo/baz', 'foo/baz/quux']
         self.assertEqual(sorted(slugs_generated), sorted(slugs_expected))
 
     def test_assign_articles_to_categories(self):
