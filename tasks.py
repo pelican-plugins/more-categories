@@ -29,11 +29,13 @@ def tests(c):
 
 
 @task
-def isort(c, check=False):
-    check_flag = ''
+def isort(c, check=False, diff=False):
+    check_flag, diff_flag = '', ''
     if check:
         check_flag = '-c'
-    c.run(f'{ISORT} {check_flag} --recursive {PKG_PATH}/* tasks.py')
+    if diff:
+        diff_flag = '--diff'
+    c.run(f'{ISORT} {check_flag} {diff_flag} --recursive {PKG_PATH}/* tasks.py')
 
 
 @task
