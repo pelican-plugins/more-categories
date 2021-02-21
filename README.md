@@ -3,7 +3,9 @@
 [![Build Status](https://img.shields.io/github/workflow/status/pelican-plugins/more-categories/build)](https://github.com/pelican-plugins/more-categories/actions) [![PyPI Version](https://img.shields.io/pypi/v/pelican-more-categories)](https://pypi.org/project/pelican-more-categories/)
 
 This plugin adds support for multiple categories per article, and for nested
-categories. It requires Pelican 4.0.0 or newer.
+categories. It requires Pelican 4.2.0 or newer.
+
+The `example` directory contains a minimal Pelican website that can be used for testing.
 
 ## Multiple categories
 To indicate that an article belongs to multiple categories, use a

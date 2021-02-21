@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content_title %}{% endblock %}
+{% block content %}
+<div id="mainColumn">
+    {% if articles %}
+    {% for article in articles_page.object_list %}
+    <div id="{{ article.slug }}" class="post">
+        <div class="postMeta">
+            <p class="container">
+                <span class="date">{{ article.locale_date }}</span>
+            </p>
+        </div>
+        <h2><a href="{{ SITEURL }}/{{ article.url }}" title="{{ article.title }}">{{ article.title }}</a></h2>
+        <div class="entry">
+            {{ article.summary }}
+            <a class="readmore" href="{{ SITEURL }}/{{ article.url }}"><p>Read the rest of this entry</p></a>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+    <div id="paginateIndex" class="fix">
+        <p>{% if articles_page.has_previous() %}<span class="left"><a href="{{ SITEURL }}/{{ articles_previous_page.url }}">&laquo; Previous</a></span>{% endif %}{% if articles_page.has_next() %}<span class="right"><a href="{{ SITEURL }}/{{ articles_next_page.url }}">Next &raquo;</a></span>{% endif %}</p>
+    </div>
+</div>
+{% endblock content %}

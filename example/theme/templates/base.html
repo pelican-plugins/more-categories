@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+    <meta charset="utf-8" />
+    <title>{% block title %}{{ SITENAME }}{%endblock%}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="generator" content="Pelican" />
+</head>
+<body>
+<div id="wrapper">
+
+    <div id="masthead" class="fix">
+        <h1><a href="{{ SITEURL }}">{{ SITENAME }}</a></h1>
+    </div>
+
+    <div id="filler" class="fix">
+        {% block navigation %}
+        {% endblock %}
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+</body>
+</html>

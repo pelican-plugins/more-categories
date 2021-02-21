@@ -1,0 +1,12 @@
+{% extends "index.html" %}
+{% block robots %}noindex,follow{% endblock %}
+{% block title %}{{ category }}{% endblock %}
+{% block navigation %}
+        <div class="entry meta">
+            <p><span class="highlight">Category:</span> <a href="{{ SITEURL }}/{{ category.parent.url }}">{{ category }}</a></p>
+            <p><span class="highlight">Parent:</span> <a href="{{ SITEURL }}/{{ category.parent.url }}">{{ category.parent }}</a></p>
+            <p><span class="highlight">Ancestors:</span> {% for ancestor in category.ancestors %}<a href="{{ SITEURL }}/{{ ancestor.url }}">{{ ancestor }}</a>{{ ', ' if not loop.last }}{% endfor %}</p>
+            <p><span class="highlight">Children:</span> {% for child in category.children %}<a href="{{ SITEURL }}/{{ child.url }}">{{ child.shortname }}</a>{{ ', ' if not loop.last }}{% endfor %}</p>
+            <p><span class="highlight">Descendents:</span> {% for descendent in category.descendents %}<a href="{{ SITEURL }}/{{ descendent.url }}">{{ descendent }}</a>{{ ', ' if not loop.last }}{% endfor %}</p>
+        </div>
+{% endblock %}
