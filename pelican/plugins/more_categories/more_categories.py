@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Title: more-categories
 Description: adds support for multiple categories per article and nested
@@ -54,13 +53,13 @@ class Category(URLWrapper):
         return [self]
 
     def as_dict(self):
-        d = super(Category, self).as_dict()
+        d = super().as_dict()
         d['shortname'] = self.shortname
         return d
 
 
 def get_categories(generator, metadata):
-    categories = text_type(metadata.get('category')).split(',')
+    categories = str(metadata.get('category')).split(',')
     metadata['categories'] = [Category(name, generator.settings) for name in categories]
     metadata['category'] = metadata['categories'][0]
 

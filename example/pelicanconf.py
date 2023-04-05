@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*- #
 SITENAME = 'more_categories test website'
 
 THEME = './theme'
