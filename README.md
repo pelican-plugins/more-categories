@@ -9,6 +9,14 @@ categories. It requires Pelican 4.2.0 or newer.
 
 The `example` directory contains a minimal Pelican web site that can be used for testing.
 
+## Installation
+
+This plugin can be installed via:
+
+    python -m pip install pelican-more-categories
+
+As long as you have not explicitly added a `PLUGINS` setting to your Pelican settings file, then the newly-installed plugin should be automatically detected and enabled. Otherwise, you must add `more-categories` to your existing `PLUGINS` list. For more information, please see the [How to Use Plugins](https://docs.getpelican.com/en/latest/plugins.html#how-to-use-plugins) documentation.
+
 ## Multiple Categories
 
 To indicate that an article belongs to multiple categories, use a
